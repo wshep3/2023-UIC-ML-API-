@@ -14,7 +14,7 @@ class ML_node
     public:
         ML_node();
     private:
-        double weights;
+        std::vector<double> weights;
         double bias;
 
         double ML_identity_func(double);
