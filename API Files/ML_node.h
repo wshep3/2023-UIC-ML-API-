@@ -15,4 +15,48 @@ class ML_node
     private:
         double weights;
         double bias;
+
+        double ML_identity_func(double);
+        double ML_identity_derv(double);
 };
+
+
+
+
+
+
+
+
+
+
+
+// Activation Functions + Derivitives
+
+double ML_node::ML_identity_func(double input)
+{
+    /*
+        args:
+            input <double>: the sum of the weights, inputs, and biases as a double
+
+        Use:
+            The identity activation function
+    
+    */
+   return input;
+
+}
+
+double ML_node::ML_identity_derv(double input)
+{
+    /*
+        args:
+            input <double>: Error Terms
+
+        Use:
+            The identity activation derivitive function
+    
+    */
+    return 1.0;
+}
+
+
