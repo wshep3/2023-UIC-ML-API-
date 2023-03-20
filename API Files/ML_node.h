@@ -102,8 +102,7 @@ double ML_node::ML_SiLU_func(double input)
             The identity activation function
     
     */
-   return exp(pow(input, 2) * -1);
-
+   return input / (1+exp(-input));
 }
 
 double ML_node::ML_SiLU_derv(double input)
@@ -116,7 +115,7 @@ double ML_node::ML_SiLU_derv(double input)
             The identity activation derivitive function
     
     */
-    return -2*input*exp(pow(input, 2) * -1);
+    return ((1+exp(-input))+(input*exp(-input)))/ pow(1+exp(-input),2);
 }
 
 
