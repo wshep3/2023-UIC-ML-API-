@@ -21,6 +21,8 @@ class ML_node
         double ML_identity_derv(double);
         double ML_Binary_step_func(double);
         double ML_Binary_step_derv(double);
+        double ML_Sigmoid_func(double);
+        double ML_Sigmoid_derv(double);
 
         double ML_SiLU_func(double);
         double ML_SiLU_derv(double);
@@ -90,6 +92,16 @@ double ML_node::ML_Binary_step_derv(double input)
             The Binary step activation derivitive function
     */
     return 0;
+}
+
+double ML_node::ML_Sigmoid_func(double input)
+{
+    return (1.0)/(1.0+exp(-1*input));
+}
+
+double ML_node::ML_Sigmoid_derv(double input)
+{
+    return ML_Sigmoid_func(input)*(1.0-ML_Sigmoid_func(input));
 }
 
 double ML_node::ML_SiLU_func(double input)
