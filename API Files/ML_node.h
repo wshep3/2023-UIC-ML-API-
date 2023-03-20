@@ -19,6 +19,8 @@ class ML_node
 
         double ML_identity_func(double);
         double ML_identity_derv(double);
+        double ML_Binary_step_func(double);
+        double ML_Binary_step_derv(double);
 };
 
 
@@ -60,4 +62,27 @@ double ML_node::ML_identity_derv(double input)
     return 1.0;
 }
 
+double ML_node::ML_Binary_step_func(double input)
+{
+    /*
+        args:
+            input <double>: the sum of the weights, inputs, and biases as a double
+        
+        Use:
+            The Binary step activation function
+    */
+    if(input >= 0){return 1;}
+    else{return 0;}
+}
 
+double ML_node::ML_Binary_step_derv(double input)
+{
+    /*
+        args:
+            input <double>: Error Terms
+        
+        Use:
+            The Binary step activation derivitive function
+    */
+    return 0;
+}
