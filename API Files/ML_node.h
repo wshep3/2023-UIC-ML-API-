@@ -23,7 +23,7 @@ class ML_node
         double ML_Binary_step_derv(double);
 
         double ML_gaussian_func(double);
-        double ML_gaussian_func(double)
+        double ML_gaussian_derv(double);
 };
 
 
