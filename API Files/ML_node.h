@@ -9,6 +9,7 @@
 #include <math.h>
 #include <cstdlib>
 #include <ctime>
+#include <stdexcept>
 
 enum ML_nType {
     NON_Declared,
@@ -27,11 +28,13 @@ class ML_node
 {
     public:
         ML_node(ML_nType, int);
+        double solve_node(std::vector<double>);
 
     private:
         std::vector<double> weights;
         double bias;
         ML_nType activation_type;
+        double get_activation(double);
         double ML_Identity_func(double);
         double ML_Identity_derv(double);
         double ML_Binary_step_func(double);
@@ -90,6 +93,59 @@ ML_node::ML_node(ML_nType activation_type, int weight_size)
    rand_num = (double)rand() / RAND_MAX;
    rand_num = 2 * rand_num - 1;
    this->bias = rand_num;
+}
+
+
+double ML_node::solve_node(std::vector<double> inputs)
+{
+    if(inputs.size() != this->weights.size())
+    {
+        throw std::invalid_argument("input and weight vector sizes do not match"); //flag
+
+    }
+
+    double temp = 0;
+    for(int i=0;i<inputs.size();i++)
+    {
+        temp += inputs[i]*weights[i];
+    }
+    temp += this->bias;
+    return get_activation(temp);
+    
+}
+
+double ML_node::get_activation(double x)
+{
+    switch (this->activation_type)
+    {
+    case NON_Declared:
+        throw std::invalid_argument("faulty activation type");
+        break;
+    case Identity:
+        return ML_Identity_func(x);
+        break;
+    case Binary_step:
+        return ML_Binary_step_func(x);
+        break;
+    case Sigmoid:
+        return ML_Sigmoid_func(x);
+        break;
+    case Softplus:
+        return ML_Softplus_func(x);
+        break;
+    case Leaky_ReLU:
+        return ML_Leaky_ReLU_func(x);
+        break;
+    case SiLU:
+        return ML_SiLU_func(x);
+        break;
+    case Gaussian:
+        return ML_Gaussian_func(x);
+        return;
+    default:
+        throw std::invalid_argument("faulty activation type");
+        break;
+    }
 }
 
 

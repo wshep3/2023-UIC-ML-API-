@@ -15,7 +15,7 @@ class ML_layer {
     private:
         std::vector<ML_node> node_layer;
         ML_nType layer_type;
-
+        
 
 };
 
