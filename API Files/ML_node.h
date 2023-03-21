@@ -174,8 +174,7 @@ double ML_Leaky_ReLU_func(double input)
 double ML_Leaky_ReLU_derv(double input)
 {
     if(input<0){return 0.01;}
-    else if(input>0){return 1;}
-    throw std::invalid_argument("Derivative not defined for input of 0");
+    else{return 1;}
 }
 
 /*
