@@ -56,18 +56,11 @@ class ML_node
         double ML_Gaussian_derv(double);
 };
 
+/// @brief Node constructor used for creating a network from scratch
+/// @param activation_type an enumerative type defining which activation type the node is
+/// @param weight_size An integer denoting how many inputs are coming from the previous layer
 ML_node::ML_node(ML_nType activation_type, int weight_size)
 {
-    /*
-        args:
-            activation_type <ML_nType>: a enumerative type defining which activation type the node is
-            weight_size <int>: An integer denoting how many inputs are coming from the previous layer
-
-        Use:
-            Node constructor used for creating a network from scratch
-    */
-
-
     /*
         each mode has a bias and weights that are associated with each input
         This looks like a single double which is a bias
@@ -96,6 +89,9 @@ ML_node::ML_node(ML_nType activation_type, int weight_size)
 }
 
 
+/// @brief Gets the output of a node
+/// @param inputs output doubles from last layer
+/// @return A single double coorsponding to a nodes output
 double ML_node::solve_node(std::vector<double> inputs)
 {
     if(inputs.size() != this->weights.size())
@@ -154,18 +150,12 @@ double ML_node::get_activation(double x)
 
 // Activation Functions + Derivitives
 
+/// @brief The identity activation function
+/// @param input the sum of the weights, inputs, and biases as a double
+/// @return The evaluation of the indentity function w.r.t its inputs
 double ML_node::ML_Identity_func(double input)
 {
-    /*
-        args:
-            input <double>: the sum of the weights, inputs, and biases as a double
-
-        Use:
-            The identity activation function
-    
-    */
    return input;
-
 }
 
 double ML_node::ML_Identity_derv(double input)
