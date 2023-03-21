@@ -37,6 +37,10 @@ class ML_node
         double ML_Sigmoid_func(double);
         double ML_Sigmoid_derv(double);
 
+        double ML_Leaky_ReLU_func(double);
+        double ML_Leaky_ReLU_derv(double);
+        double ML_PReLU_func(double);
+        double ML_PReLU_derv(double);
         double ML_SiLU_func(double);
         double ML_SiLU_derv(double);
         double ML_gaussian_func(double);
@@ -49,7 +53,7 @@ ML_node::ML_node(ML_nType activation_type, int weight_size)
         args:
             activation_type <ML_nType>: a enumerative type defining which activation type the node is
             weight_size <int>: An integer denoting how many inputs are coming from the previous layer
-        
+
         Use:
             Node constructor used for creating a network from scratch
     */
@@ -161,18 +165,42 @@ double ML_node::ML_Sigmoid_derv(double input)
     return ML_Sigmoid_func(input)*(1.0-ML_Sigmoid_func(input));
 }
 
+double ML_Leaky_ReLU_func(double input)
+{
+    if(input<0){return 0.01*input;}
+    else{return input;}
+}
+        
+double ML_Leaky_ReLU_derv(double input)
+{
+    if(input<0){return 0.01;}
+    else if(input>0){return 1;}
+    throw std::invalid_argument("Derivative not defined for input of 0");
+}
+
+/*
+double ML_node::ML_PReLU_func(double input)
+   int a;
+   if(input>=0){return input;} 
+   else{return input*a;}
+}
+
+double ML_node::ML_PReLU_derv(double input)
+{
+   int a;
+    if(input<0){return a;}
+    else{return 1;}
+}
+
+*/
+
 double ML_node::ML_SiLU_func(double input)
 {
-    /*
-        args:
-            input <double>: the sum of the weights, inputs, and biases as a double
 
-        Use:
-            The identity activation function
-    
-    */
    return input / (1+exp(-input));
 }
+
+
 
 double ML_node::ML_SiLU_derv(double input)
 {
