@@ -61,6 +61,7 @@ class ML_node
 /// @param weight_size An integer denoting how many inputs are coming from the previous layer
 ML_node::ML_node(ML_nType activation_type, int weight_size)
 {
+
     /*
         each mode has a bias and weights that are associated with each input
         This looks like a single double which is a bias
@@ -158,16 +159,11 @@ double ML_node::ML_Identity_func(double input)
    return input;
 }
 
+/// @brief The identity activation derivitive function
+/// @param input Error Terms
+/// @return The evaluation of the identity activation derivitive function
 double ML_node::ML_Identity_derv(double input)
 {
-    /*
-        args:
-            input <double>: Error Terms
-
-        Use:
-            The identity activation derivitive function
-    
-    */
     return 1.0;
 }
 
