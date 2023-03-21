@@ -7,16 +7,29 @@
 
 #include <vector>
 #include <math.h>
+#include <cstdlib>
+#include <ctime>
 
+enum ML_nType {
+    NON_Declared,
+    identity,
+    binary_step,
+    sigmoid,
+
+
+    SiLU,
+    gaussian
+};
 
 class ML_node
 {
     public:
-        ML_node();
+        ML_node(ML_nType, int);
+
     private:
         std::vector<double> weights;
         double bias;
-
+        ML_nType activation_type;
         double ML_identity_func(double);
         double ML_identity_derv(double);
         double ML_Binary_step_func(double);
@@ -30,14 +43,44 @@ class ML_node
         double ML_gaussian_derv(double);
 };
 
+ML_node::ML_node(ML_nType activation_type, int weight_size)
+{
+    /*
+        args:
+            activation_type <ML_nType>: a enumerative type defining which activation type the node is
+            weight_size <int>: An integer denoting how many inputs are coming from the previous layer
+        
+        Use:
+            Node constructor used for creating a network from scratch
+    */
 
 
+    /*
+        each mode has a bias and weights that are associated with each input
+        This looks like a single double which is a bias
+        and a vector of weights -> this doesnt have to be dynamic but we are in c++ so who cares
+    */
 
+    /*
+        Be defult weights should be initiallized with random biases
+        because we want an option to load networks I think we will create
+        two diffrent constructer methods - this one is for creating a network
+        from scratch
+    */
 
-
-
-
-
+   this->activation_type = activation_type;
+   std::srand(time(nullptr));
+   double rand_num = 0;
+   for(int i=0;i<weight_size;i++)
+   {
+    rand_num = (double)rand() / RAND_MAX;
+    rand_num = 2 * rand_num - 1;
+    this->weights.push_back(rand_num);
+   }
+   rand_num = (double)rand() / RAND_MAX;
+   rand_num = 2 * rand_num - 1;
+   this->bias = rand_num;
+}
 
 
 // Activation Functions + Derivitives
@@ -96,11 +139,25 @@ double ML_node::ML_Binary_step_derv(double input)
 
 double ML_node::ML_Sigmoid_func(double input)
 {
+    /*
+        args:
+            input <double>: the sum of the weights, inputs, and biases as a double
+        
+        Use:
+            The Sigmoid activation function
+    */
     return (1.0)/(1.0+exp(-1*input));
 }
 
 double ML_node::ML_Sigmoid_derv(double input)
 {
+    /*
+        args:
+            input <double>: Error Terms
+        
+        Use:
+            The Sigmoid activation derivitive function
+    */
     return ML_Sigmoid_func(input)*(1.0-ML_Sigmoid_func(input));
 }
 
