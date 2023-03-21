@@ -236,12 +236,18 @@ double ML_Softplus_derv(double input)
     return 1/(1+exp(input));
 }
 
+/// @brief The Leaky ReLU activation function
+/// @param inputs input <double>: the sum of the weights, inputs, and biases as a double
+/// @return The evaluation of theLeaky ReLU function w.r.t its inputs
 double ML_Leaky_ReLU_func(double input)
 {
     if(input<0){return 0.01*input;}
     else{return input;}
 }
-        
+
+/// @brief The Leaky ReLU activation derivitive function
+/// @param inputs input <double>: the sum of the weights, inputs, and biases as a double
+/// @return The derivative of the Leaky ReLU function w.r.t its inputs     
 double ML_Leaky_ReLU_derv(double input)
 {
     if(input<0){return 0.01;}
@@ -264,6 +270,9 @@ double ML_node::ML_PReLU_derv(double input)
 
 */
 
+/// @brief The SiLU activation function
+/// @param inputs input <double>: the sum of the weights, inputs, and biases as a double
+/// @return The evaluation of the SiLU function w.r.t its inputs
 double ML_node::ML_SiLU_func(double input)
 {
 
@@ -271,17 +280,11 @@ double ML_node::ML_SiLU_func(double input)
 }
 
 
-
+/// @brief The SiLU activation derivitive function
+/// @param inputs input <double>: the sum of the weights, inputs, and biases as a double
+/// @return The derivative of the SiLU function w.r.t its inputs
 double ML_node::ML_SiLU_derv(double input)
 {
-    /*
-        args:
-            input <double>: Error Terms
-
-        Use:
-            The identity activation derivitive function
-    
-    */
     return ((1+exp(-input))+(input*exp(-input)))/ pow(1+exp(-input),2);
 }
 
