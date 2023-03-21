@@ -12,14 +12,14 @@
 
 enum ML_nType {
     NON_Declared,
-    identity,
-    binary_step,
-    sigmoid,
+    Identity,
+    Binary_step,
+    Sigmoid,
 
     Softplus,
     Leaky_ReLU,
     SiLU,
-    gaussian
+    Gaussian
 };
 
 class ML_node
@@ -31,8 +31,8 @@ class ML_node
         std::vector<double> weights;
         double bias;
         ML_nType activation_type;
-        double ML_identity_func(double);
-        double ML_identity_derv(double);
+        double ML_Identity_func(double);
+        double ML_Identity_derv(double);
         double ML_Binary_step_func(double);
         double ML_Binary_step_derv(double);
         double ML_Sigmoid_func(double);
@@ -46,8 +46,8 @@ class ML_node
         double ML_PReLU_derv(double);
         double ML_SiLU_func(double);
         double ML_SiLU_derv(double);
-        double ML_gaussian_func(double);
-        double ML_gaussian_derv(double);
+        double ML_Gaussian_func(double);
+        double ML_Gaussian_derv(double);
 };
 
 ML_node::ML_node(ML_nType activation_type, int weight_size)
@@ -92,7 +92,7 @@ ML_node::ML_node(ML_nType activation_type, int weight_size)
 
 // Activation Functions + Derivitives
 
-double ML_node::ML_identity_func(double input)
+double ML_node::ML_Identity_func(double input)
 {
     /*
         args:
@@ -106,7 +106,7 @@ double ML_node::ML_identity_func(double input)
 
 }
 
-double ML_node::ML_identity_derv(double input)
+double ML_node::ML_Identity_derv(double input)
 {
     /*
         args:
@@ -228,7 +228,7 @@ double ML_node::ML_SiLU_derv(double input)
 }
 
 
-double ML_node::ML_gaussian_func(double input)
+double ML_node::ML_Gaussian_func(double input)
 {
     /*
         args:
@@ -242,7 +242,7 @@ double ML_node::ML_gaussian_func(double input)
 
 }
 
-double ML_node::ML_gaussian_derv(double input)
+double ML_node::ML_Gaussian_derv(double input)
 {
     /*
         args:
