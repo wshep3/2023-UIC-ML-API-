@@ -130,6 +130,9 @@ double ML_node::get_activation(double x)
     case Sigmoid:
         return ML_Sigmoid_func(x);
         break;
+    case Tanh:
+        return ML_Tanh_func(x);
+        break;
     case Softplus:
         return ML_Softplus_func(x);
         break;
