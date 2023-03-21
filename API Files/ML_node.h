@@ -15,6 +15,7 @@ enum ML_nType {
     Identity,
     Binary_step,
     Sigmoid,
+    Tanh,
 
     Softplus,
     Leaky_ReLU,
@@ -37,6 +38,8 @@ class ML_node
         double ML_Binary_step_derv(double);
         double ML_Sigmoid_func(double);
         double ML_Sigmoid_derv(double);
+        double ML_Tanh_func(double);
+        double ML_Tanh_derv(double);
 
         double ML_Softplus_func(double);
         double ML_Softplus_derv(double);
@@ -166,6 +169,16 @@ double ML_node::ML_Sigmoid_derv(double input)
             The Sigmoid activation derivitive function
     */
     return ML_Sigmoid_func(input)*(1.0-ML_Sigmoid_func(input));
+}
+
+double ML_Tanh_func(double input)
+{
+    return (exp(input)-exp(input*-1))/(exp(input)+ exp(input*-1));
+}
+
+double ML_Tanh_derv(double input)
+{
+    return 1 - pow(ML_Tanh_func(input), 2);
 }
 
 double ML_Softplus_func(double input)
