@@ -31,6 +31,10 @@ ML_layer::ML_layer(ML_nType ntype, int layer_size, int size_previous)
     this->layer_type = ntype;
 }
 
+
+/// @brief Solves all nodes of a layer
+/// @param inputs inputs <double>:  the sum of the weights, inputs, and biases as a double
+/// @return Outputs a vector of node evaluations
 std::vector<double> ML_layer::Solve_layer(std::vector<double> inputs){
     std::vector<double> outputs;
     for (int i = 0; i < node_layer.size(); i++){
