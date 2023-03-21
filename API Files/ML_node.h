@@ -17,6 +17,7 @@ enum ML_nType {
     sigmoid,
 
 
+    Leaky_ReLU,
     SiLU,
     gaussian
 };
