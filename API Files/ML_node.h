@@ -152,8 +152,8 @@ double ML_node::get_activation(double x)
 // Activation Functions + Derivitives
 
 /// @brief The identity activation function
-/// @param input the sum of the weights, inputs, and biases as a double
-/// @return The evaluation of the indentity function w.r.t its inputs
+/// @param input The sum of the weights, inputs, and biases as a double
+/// @return The evaluation of the indentity function
 double ML_node::ML_Identity_func(double input)
 {
    return input;
@@ -167,52 +167,36 @@ double ML_node::ML_Identity_derv(double input)
     return 1.0;
 }
 
+/// @brief The Binary step activation function
+/// @param input The sum of the weights, inputs, and biases as a double
+/// @return The evaluation of the Binary step activation function
 double ML_node::ML_Binary_step_func(double input)
 {
-    /*
-        args:
-            input <double>: the sum of the weights, inputs, and biases as a double
-        
-        Use:
-            The Binary step activation function
-    */
     if(input >= 0){return 1;}
     else{return 0;}
 }
 
+/// @brief The Binary step activation derivitive function
+/// @param input Error Terms
+/// @return The evaluation of the Binary step activation derivitive function
 double ML_node::ML_Binary_step_derv(double input)
 {
-    /*
-        args:
-            input <double>: Error Terms
-        
-        Use:
-            The Binary step activation derivitive function
-    */
-    return 0;
+    return 0.0;
 }
 
+/// @brief The Sigmoid activation function
+/// @param input The sum of the weights, inputs, and biases as a double 
+/// @return The evaluation of the Sigmoid activation function
 double ML_node::ML_Sigmoid_func(double input)
 {
-    /*
-        args:
-            input <double>: the sum of the weights, inputs, and biases as a double
-        
-        Use:
-            The Sigmoid activation function
-    */
     return (1.0)/(1.0+exp(-1*input));
 }
 
+/// @brief The Sigmoid activation derivitive function
+/// @param input Error Terms
+/// @return The evaluation of the Sigmoid activation derivitive function
 double ML_node::ML_Sigmoid_derv(double input)
 {
-    /*
-        args:
-            input <double>: Error Terms
-        
-        Use:
-            The Sigmoid activation derivitive function
-    */
     return ML_Sigmoid_func(input)*(1.0-ML_Sigmoid_func(input));
 }
 
