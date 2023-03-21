@@ -16,7 +16,7 @@ enum ML_nType {
     binary_step,
     sigmoid,
 
-
+    Softplus,
     Leaky_ReLU,
     SiLU,
     gaussian
@@ -38,6 +38,8 @@ class ML_node
         double ML_Sigmoid_func(double);
         double ML_Sigmoid_derv(double);
 
+        double ML_Softplus_func(double);
+        double ML_Softplus_derv(double);
         double ML_Leaky_ReLU_func(double);
         double ML_Leaky_ReLU_derv(double);
         double ML_PReLU_func(double);
@@ -164,6 +166,16 @@ double ML_node::ML_Sigmoid_derv(double input)
             The Sigmoid activation derivitive function
     */
     return ML_Sigmoid_func(input)*(1.0-ML_Sigmoid_func(input));
+}
+
+double ML_Softplus_func(double input)
+{
+    log(1+ exp(input));
+}
+
+double ML_Softplus_derv(double input)
+{
+    return 1/(1+exp(input));
 }
 
 double ML_Leaky_ReLU_func(double input)
