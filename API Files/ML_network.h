@@ -20,7 +20,7 @@ class ML_network
         std::vector<double> solve(std::vector<double>);
         void train(std::vector<std::vector<double>>, std::vector<std::vector<double>>, int, bool);
         void add_layer(int, ML_nType);
-        double get_network_error(std::vector<double> x_data, std::vector<double> y_data);
+        double get_network_error(std::vector<double>, std::vector<double>);
 
     private:
         double ML_MSE_loss(std::vector<double> solved, std::vector<double> actul);
@@ -61,6 +61,21 @@ std::vector<double> ML_network::solve(std::vector<double> x_data)
 void ML_network::train(std::vector<std::vector<double>> x_data, std::vector<std::vector<double>> y_data, int epochs, bool trace)
 {
     return;
+}
+
+double ML_network::get_network_error(std::vector<double> x_data, std::vector<double> y_data)
+{
+    std::vector<double> y_preds = solve(x_data);
+    switch (this->network_error)
+    {
+    case NON_Declared:
+        throw std::invalid_argument("faulty error type");
+        break;
+    case MSE:
+        return ML_MSE_loss(y_preds, y_data);
+    default:
+        break;
+    }
 }
 
 double ML_MSE_loss(std::vector<double> solved, std::vector<double> actul){
