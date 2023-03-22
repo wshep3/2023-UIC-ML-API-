@@ -50,7 +50,10 @@ void ML_network::add_layer(int nodes, ML_nType activation_type)
 
 std::vector<double> ML_network::solve(std::vector<double> x_data)
 {
-    return {};
+    for(int i = 0; i < network_vector.size(); i++){
+        x_data = network_vector[i].Solve_layer(x_data);
+    }
+    return x_data;
 }
 
 void ML_network::train(std::vector<std::vector<double>> x_data, std::vector<std::vector<double>> y_data, int epochs, bool trace)
