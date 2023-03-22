@@ -141,7 +141,7 @@ double ML_node::get_activation(double x)
         break;
     case Gaussian:
         return ML_Gaussian_func(x);
-        return;
+        break;
     default:
         throw std::invalid_argument("faulty activation type");
         break;
