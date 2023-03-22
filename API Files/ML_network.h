@@ -62,3 +62,11 @@ void ML_network::train(std::vector<std::vector<double>> x_data, std::vector<std:
 {
     return;
 }
+
+double ML_MSE_loss(std::vector<double> solved, std::vector<double> actul){
+    double error = 0;
+    for (int i = 0; i < solved.size(); i++){
+        error += pow(solved[i]-actul[i], 2);
+    }
+    return (1.0/solved.size())*error;
+}
