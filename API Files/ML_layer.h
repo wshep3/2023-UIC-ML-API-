@@ -11,12 +11,13 @@ class ML_layer {
     public:
         ML_layer(ML_nType, int, int);
         int get_layer_size();
+        std::vector<double> Solve_layer(std::vector<double>);
 
     private:
         int layer_size;
         std::vector<ML_node> node_layer;
         ML_nType layer_type;
-        std::vector<double> Solve_layer(std::vector<double>);
+        
 
 };
 
