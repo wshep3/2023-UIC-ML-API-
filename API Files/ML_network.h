@@ -20,8 +20,10 @@ class ML_network
         std::vector<double> solve(std::vector<double>);
         void train(std::vector<std::vector<double>>, std::vector<std::vector<double>>, int, bool);
         void add_layer(int, ML_nType);
+        double get_network_error(std::vector<double> x_data, std::vector<double> y_data);
 
     private:
+        double ML_MSE_loss(std::vector<double> solved, std::vector<double> actul);
         ML_eType network_error;
         std::vector<ML_layer> network_vector;
         int input_size;
