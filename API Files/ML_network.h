@@ -37,6 +37,9 @@ ML_network::ML_network(int inputs, ML_eType error_type)
     this->network_error = error_type;
 }
 
+/// @brief Adds a layer to the network
+/// @param nodes Data of the nodes
+/// @param activation_type Activation function of the node
 void ML_network::add_layer(int nodes, ML_nType activation_type)
 {
     if(network_vector.size() == 0)
@@ -50,6 +53,9 @@ void ML_network::add_layer(int nodes, ML_nType activation_type)
 }
 
 
+/// @brief Solves the layers of the network
+/// @param x_data Input layer
+/// @return Solved network output
 std::vector<double> ML_network::solve(std::vector<double> x_data)
 {
     for(int i = 0; i < network_vector.size(); i++){
@@ -63,6 +69,11 @@ void ML_network::train(std::vector<std::vector<double>> x_data, std::vector<std:
     return;
 }
 
+
+/// @brief Calls the respective cost function of the network
+/// @param x_data Double vector of the output layer
+/// @param y_data Double vector of input values
+/// @return Output of cost function
 double ML_network::get_network_error(std::vector<double> x_data, std::vector<double> y_data)
 {
     std::vector<double> y_preds = solve(x_data);
@@ -78,6 +89,10 @@ double ML_network::get_network_error(std::vector<double> x_data, std::vector<dou
     }
 }
 
+/// @brief Mean squared error cost function
+/// @param solved Double vector of the output layer
+/// @param actul Double vector of input values
+/// @return Mean squared error
 double ML_MSE_loss(std::vector<double> solved, std::vector<double> actul){
     double error = 0;
     for (int i = 0; i < solved.size(); i++){
