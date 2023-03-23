@@ -1,9 +1,8 @@
 // API created by William Shepelak and Carmen Thom 3/19/2023
 
-#include <vector>
-#include <math.h>
-#include "ML_node.h"
 #include "ML_layer.h"
+#include <fstream>
+#include <string>
 #pragma once
 
 enum ML_eType 
@@ -22,6 +21,7 @@ class ML_network
         void train(std::vector<std::vector<double>>, std::vector<std::vector<double>>, int, bool);
         void add_layer(int, ML_nType);
         double get_network_error(std::vector<double>, std::vector<double>);
+        void save_network(std::string);
 
     private:
         double ML_MSE_loss(std::vector<double> solved, std::vector<double> actul);
@@ -101,4 +101,25 @@ double ML_network::ML_MSE_loss(std::vector<double> solved, std::vector<double> a
         error += pow(solved[i]-actul[i], 2);
     }
     return (1.0/solved.size())*error;
+}
+
+void ML_network::save_network(std::string fname)
+{
+    std::string network_data;
+    switch (this->network_error)
+    {
+    case NON:
+        throw std::invalid_argument("faulty error type");
+        break;
+    case MSE:
+        network_data += "MSE\n";
+        break;
+    default:
+        throw std::invalid_argument("faulty error type");
+        break;
+    }
+    for(int i=0;i<network_vector.size();i++)
+    {
+        network_data += network_vector[i].save_layer();
+    }
 }

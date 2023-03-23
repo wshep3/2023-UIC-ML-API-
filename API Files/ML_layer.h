@@ -1,7 +1,5 @@
 // API created by William Shepelak and Carmen Thom 3/19/2023
 
-#include <vector>
-#include <math.h>
 #include "ML_node.h"
 #pragma once
 
@@ -13,6 +11,7 @@ class ML_layer {
         ML_layer(ML_nType, int, int);
         int get_layer_size();
         std::vector<double> Solve_layer(std::vector<double>);
+        std::string save_layer();
 
     private:
         int layer_size;
@@ -51,4 +50,43 @@ std::vector<double> ML_layer::Solve_layer(std::vector<double> inputs){
 int ML_layer::get_layer_size()
 {
     return this->layer_size;
+}
+
+std::string ML_layer::save_layer()
+{
+    std::string layer_data = "";
+    switch (this->layer_type)
+    {
+    case NON_Declared:
+        throw std::invalid_argument("faulty activation type");
+        break;
+    case Identity:
+        layer_data += "Identity:";
+        break;
+    case Binary_step:
+        
+        break;
+    case Sigmoid:
+        
+        break;
+    case Tanh:
+        
+        break;
+    case Softplus:
+        
+        break;
+    case Leaky_ReLU:
+        
+        break;
+    case SiLU:
+        
+        break;
+    case Gaussian:
+        
+        break;
+    default:
+        throw std::invalid_argument("faulty activation type");
+        break;
+    }
+    // more to come!
 }

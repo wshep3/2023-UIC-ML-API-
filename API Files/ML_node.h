@@ -6,6 +6,7 @@
 */
 
 #include <vector>
+#include <string>
 #include <math.h>
 #include <cstdlib>
 #include <ctime>
@@ -29,6 +30,7 @@ class ML_node
 {
     public:
         ML_node(ML_nType, int);
+        ML_node(ML_nType, std::vector<double>, double);
         double solve_node(std::vector<double>);
 
     private:
@@ -88,6 +90,13 @@ ML_node::ML_node(ML_nType activation_type, int weight_size)
    rand_num = (double)rand() / RAND_MAX;
    rand_num = 2 * rand_num - 1;
    this->bias = rand_num;
+}
+
+ML_node::ML_node(ML_nType activation_type, std::vector<double> weights, double bias)
+{
+    this->activation_type = activation_type;
+    this->weights = weights;
+    this->bias = bias;
 }
 
 
