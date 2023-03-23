@@ -3,6 +3,7 @@
 #include <vector>
 #include <math.h>
 #include "ML_node.h"
+#pragma once
 
 
 

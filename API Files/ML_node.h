@@ -10,6 +10,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <stdexcept>
+#pragma once
 
 enum ML_nType {
     NON_Declared,
@@ -203,7 +204,7 @@ double ML_node::ML_Sigmoid_derv(double input)
 /// @brief The Tanh activation function
 /// @param input The sum of the weights, inputs, and biases as a double 
 /// @return The evaluation of the Tanh activation function
-double ML_Tanh_func(double input)
+double ML_node::ML_Tanh_func(double input)
 {
     return (exp(input)-exp(input*-1))/(exp(input)+ exp(input*-1));
 }
@@ -211,7 +212,7 @@ double ML_Tanh_func(double input)
 /// @brief The Tanh activation derivitive function
 /// @param input Error Terms
 /// @return The evaluation of the Tanh activation derivitive function
-double ML_Tanh_derv(double input)
+double ML_node::ML_Tanh_derv(double input)
 {
     return 1 - pow(ML_Tanh_func(input), 2);
 }
@@ -219,15 +220,15 @@ double ML_Tanh_derv(double input)
 /// @brief The Softplus activation function
 /// @param input The sum of the weights, inputs, and biases as a double 
 /// @return The evaluation of the Softplus activation function
-double ML_Softplus_func(double input)
+double ML_node::ML_Softplus_func(double input)
 {
-    log(1+ exp(input));
+    return log(1+ exp(input));
 }
 
 /// @brief The Softplus activation derivitive function
 /// @param input Error Terms
 /// @return The evaluation of the Softplus activation derivitive function
-double ML_Softplus_derv(double input)
+double ML_node::ML_Softplus_derv(double input)
 {
     return 1/(1+exp(input));
 }
@@ -235,7 +236,7 @@ double ML_Softplus_derv(double input)
 /// @brief The Leaky ReLU activation function
 /// @param inputs input <double>: the sum of the weights, inputs, and biases as a double
 /// @return The evaluation of theLeaky ReLU function w.r.t its inputs
-double ML_Leaky_ReLU_func(double input)
+double ML_node::ML_Leaky_ReLU_func(double input)
 {
     if(input<0){return 0.01*input;}
     else{return input;}
@@ -244,7 +245,7 @@ double ML_Leaky_ReLU_func(double input)
 /// @brief The Leaky ReLU activation derivitive function
 /// @param inputs Error Terms
 /// @return The derivative of the Leaky ReLU function w.r.t its inputs     
-double ML_Leaky_ReLU_derv(double input)
+double ML_node::ML_Leaky_ReLU_derv(double input)
 {
     if(input<0){return 0.01;}
     else{return 1;}

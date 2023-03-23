@@ -4,10 +4,11 @@
 #include <math.h>
 #include "ML_node.h"
 #include "ML_layer.h"
+#pragma once
 
 enum ML_eType 
 {
-    NON_Declared,
+    NON,
     MSE,
 
 };
@@ -79,12 +80,13 @@ double ML_network::get_network_error(std::vector<double> x_data, std::vector<dou
     std::vector<double> y_preds = solve(x_data);
     switch (this->network_error)
     {
-    case NON_Declared:
+    case NON:
         throw std::invalid_argument("faulty error type");
         break;
     case MSE:
         return ML_MSE_loss(y_preds, y_data);
     default:
+        throw std::invalid_argument("faulty error type");
         break;
     }
 }
@@ -93,7 +95,7 @@ double ML_network::get_network_error(std::vector<double> x_data, std::vector<dou
 /// @param solved Double vector of the output layer
 /// @param actul Double vector of input values
 /// @return Mean squared error
-double ML_MSE_loss(std::vector<double> solved, std::vector<double> actul){
+double ML_network::ML_MSE_loss(std::vector<double> solved, std::vector<double> actul){
     double error = 0;
     for (int i = 0; i < solved.size(); i++){
         error += pow(solved[i]-actul[i], 2);
