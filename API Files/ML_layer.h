@@ -64,25 +64,25 @@ std::string ML_layer::save_layer()
         layer_data += "Identity:";
         break;
     case Binary_step:
-        layer_data += "Binary_step";
+        layer_data += "Binary_step:";
         break;
     case Sigmoid:
-        layer_data += "Sigmoid";
+        layer_data += "Sigmoid:";
         break;
     case Tanh:
-        layer_data += "Tanh";
+        layer_data += "Tanh:";
         break;
     case Softplus:
-        layer_data += "Softplus";
+        layer_data += "Softplus:";
         break;
     case Leaky_ReLU:
-        layer_data += "LeakyReLU";
+        layer_data += "LeakyReLU:";
         break;
     case SiLU:
-        layer_data += "SiLU";
+        layer_data += "SiLU:";
         break;
     case Gaussian:
-        layer_data += "Gaussian";
+        layer_data += "Gaussian:";
         break;
     default:
         throw std::invalid_argument("faulty activation type");
