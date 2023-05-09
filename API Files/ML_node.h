@@ -122,6 +122,10 @@ double ML_node::solve_node(std::vector<double> inputs)
     
 }
 
+
+/// @brief gathers the currect activation for the objects defined activation type
+/// @param x the value passed into the activation function
+/// @return the evaulation of the activation function given the objects activation type
 double ML_node::get_activation(double x)
 {
     switch (this->activation_type)
